@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 
 //Add CORS Support to REST API
-app.use(cors());
+app.use(cors() );
 
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true })) 
