@@ -79,6 +79,10 @@ export class Provider extends Component{
         const password = atob(Cookies.get("userpass"))
 
         this.data.deleteCourse(id,username,password)
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
     }
 
     render(){

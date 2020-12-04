@@ -30,8 +30,8 @@ class CourseDetail extends Component {
             }
         })
         .catch(err =>{
-            this.props.history.push('/error')
-            console.log(err)
+            this.props.history.push('/error');
+            console.log(err);
         })
     }
 
@@ -64,10 +64,6 @@ class CourseDetail extends Component {
         const {courseAuthorId}=this.state;
 
         const authUser = authId === courseAuthorId;
-
-        const foundCourse = this.state.course.length > 0;
-
-        console.log(foundCourse)
 
         return(
             <React.Fragment>

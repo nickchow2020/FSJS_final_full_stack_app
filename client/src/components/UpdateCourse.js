@@ -41,11 +41,15 @@ class UpdateCourse extends Component{
             }
 
         })
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
     }
 
     cancel = ()=>{
-        const id = this.props.match.params.id
-        this.props.history.push(`/course/${id}`)
+        const id = this.props.match.params.id;
+        this.props.history.push(`/course/${id}`);
     }
 
     change = (e)=>{
@@ -87,6 +91,10 @@ class UpdateCourse extends Component{
                 this.props.history.push(`/course/${id}`)
             }
         })
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
     }
 
     render(){
@@ -103,8 +111,6 @@ class UpdateCourse extends Component{
         } = this.state
 
         const hasErrors = errors.length > 0 
-
-
 
         return(
             <div className="bounds course--detail">

@@ -20,6 +20,10 @@ class DeleteCourse extends Component {
                 deleteCourse
             })
         })
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
 
 
     }

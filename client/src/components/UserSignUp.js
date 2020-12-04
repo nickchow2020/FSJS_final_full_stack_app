@@ -55,6 +55,7 @@ class UserSignUp extends Component{
             }
         })
         .catch(err =>{
+            this.props.history.push("/error")
             console.log(err)
         })
     };

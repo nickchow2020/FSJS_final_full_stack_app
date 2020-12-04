@@ -28,8 +28,8 @@ export default class Data{
         const response = await this.api("/courses","GET")
         if(response.status === 200){
             return response.json().then(data => data.allCourses)
-        }else if (response.status === 500){
-            console.log("YES")
+        }else{
+            console.log(response);
         }
     }
 

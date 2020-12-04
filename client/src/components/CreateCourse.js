@@ -55,6 +55,10 @@ class CreateCourse extends Component {
             this.props.history.push("/")
             }
         })
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
     }
 
     render(){
