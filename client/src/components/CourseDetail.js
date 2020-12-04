@@ -1,5 +1,5 @@
 import React ,{ Component } from "react"; 
-import CourseDetailBtn from "./CourseDetailButtons" // import the buttons components
+import CourseDetailBtn from "./CourseDetailButtons"; // import the buttons components
 import Reactmarkdown from "react-markdown";
 class CourseDetail extends Component {
     
@@ -20,10 +20,18 @@ class CourseDetail extends Component {
         context.data.getCourses()
         .then(data =>{
             const targetCourse = data.find(data => data.id === id);
-            this.setState({
-                course: targetCourse,
-                courseAuthorId : targetCourse.authenticateUser.id
-            });
+            if(targetCourse){
+                this.setState({
+                    course: targetCourse,
+                    courseAuthorId : targetCourse.authenticateUser.id
+                });
+            }else{
+                this.props.history.push('/notfound')
+            }
+        })
+        .catch(err =>{
+            this.props.history.push('/error')
+            console.log(err)
         })
     }
 
@@ -56,6 +64,10 @@ class CourseDetail extends Component {
         const {courseAuthorId}=this.state;
 
         const authUser = authId === courseAuthorId;
+
+        const foundCourse = this.state.course.length > 0;
+
+        console.log(foundCourse)
 
         return(
             <React.Fragment>

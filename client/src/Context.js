@@ -50,9 +50,9 @@ export class Provider extends Component{
 
         const {
             emailAddress:username
-        } = this.state.authenticatedUser
+        } = this.state.authenticatedUser;
 
-        const password = atob(Cookies.get("userpass"))
+        const password = atob(Cookies.get("userpass"));
 
         const addCourses = this.data.createCourse(newCourse,username,password)
         return addCourses

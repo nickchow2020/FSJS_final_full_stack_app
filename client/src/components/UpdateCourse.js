@@ -21,20 +21,25 @@ class UpdateCourse extends Component{
         .then(data =>{
             const id = parseInt(this.props.match.params.id);
             const course = data.find(data => data.id === id);
-            const {
-                title,
-                description,
-                estimatedTime,
-                materialsNeeded,
-            
-            } = course;
+            if(course){
+                const {
+                    title,
+                    description,
+                    estimatedTime,
+                    materialsNeeded,
+                
+                } = course;
+    
+                this.setState({
+                    title,
+                    description,
+                    estimatedTime,
+                    materialsNeeded,
+                })
+            }else{
+                this.props.history.push('/notfound')
+            }
 
-            this.setState({
-                title,
-                description,
-                estimatedTime,
-                materialsNeeded,
-            })
         })
     }
 

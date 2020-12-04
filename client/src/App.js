@@ -13,11 +13,14 @@ import CreateCourse from "./components/CreateCourse" // import UserSignIn compon
 import UpdateCourse from "./components/UpdateCourse" // import UpdateCourse component
 import UserSignOut from "./components/UserSignOut" // import UserSignOut component
 import DeleteCourse from './components/DeleteCourse' // import DeleteCourse component
+import NotFound from "./components/NotFound"; // import not found!
+import UnhandledError from "./components/UnhandledError"; // import not found!
 
 import Authenticated from "./components/Authenticated" 
 
 import withContext from "./Context";
 import PrivideRoute from "./AuthorizatedRoute";
+
 
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
@@ -44,6 +47,9 @@ export default function App(){
         <Route path="/courses/:id/delete" component={DeleteCourseWithContext} />
         <PrivideRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
         <PrivideRoute path="/courses/create" component={CreateCourseWithContext} />
+        <Route path="/notfound" component={NotFound} />
+        <Route path="/forbidden" />
+        <Route path="/error" component={UnhandledError} />
       </Switch>
     </Router>
   )
