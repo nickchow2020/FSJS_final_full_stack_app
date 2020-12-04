@@ -11,15 +11,17 @@ export default class Course extends Component{
 
     }
 
+    
     componentDidMount = ()=>{
         const {context} = this.props 
 
+        //call getCourses() when component it mounted
         context.data.getCourses()
         .then(data =>{
             this.setState({
                 allCourses: data
             })
-        })
+        })//catch error
         .catch(err=>{
             this.props.history.push('/error');
             console.log(err);

@@ -2,6 +2,8 @@ const url = 'http://localhost:5000/api';
 
 
 export default class Data{
+
+    //api method handle the HTTP Request with authenticate USER  
     api(path,method,body=null,requireAuth=false,credentials=null){
         const fetchUrl = url + path;
 
@@ -24,17 +26,19 @@ export default class Data{
         return fetch(fetchUrl,options)
     }
 
+    //GET all courses method
     async getCourses (){
-        const response = await this.api("/courses","GET")
+        const response = await this.api("/courses","GET");
         if(response.status === 200){
-            return response.json().then(data => data.allCourses)
+            return response.json().then(data => data.allCourses);
         }else{
             console.log(response);
         }
     }
 
+    //Create a new User
     async createUser (user){
-        const response = await this.api("/users","POST",user)
+        const response = await this.api("/users","POST",user);
         if(response.status === 201){
             return [];
         }else if(response.status === 400){
@@ -46,6 +50,7 @@ export default class Data{
         }
     }
 
+    //GET USER Sign in method
     async getUser (username,password){
         const response = await this.api("/users","GET",null,true,{username,password})
         if(response.status === 200){
@@ -57,7 +62,7 @@ export default class Data{
         }
     }
 
-
+    //POST create a new course
     async createCourse (course,username,password){
         const response = await this.api("/courses","POST",course,true,{username,password})
         if(response.status === 201){
@@ -71,6 +76,7 @@ export default class Data{
         }
     }
 
+    //PUT update courses
     async updateCourse (id,data,username,password){
         const response = await this.api(`/courses/${id}`,"PUT",data,true,{username,password})
         if(response.status === 204){
@@ -84,6 +90,7 @@ export default class Data{
         }
     }
 
+    //DELETE course
     async deleteCourse (id,username,password){
         const response =  await this.api(`/courses/${id}`,"DELETE",null,true,{username,password})
         if(response.status === 204){

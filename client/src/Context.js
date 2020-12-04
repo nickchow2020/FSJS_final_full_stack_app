@@ -2,7 +2,8 @@ import React,{Component} from "react";
 import Data from "./Data";
 import Cookies from "js-cookie";
 
-const Context = React.createContext();
+//Create Context
+const Context = React.createContext(); 
 
 export class Provider extends Component{
 
@@ -10,11 +11,12 @@ export class Provider extends Component{
         super()
         this.data = new Data()
         this.state = {
+            //initial Auth USER  to null
             authenticatedUser: Cookies.getJSON("authenticatedUser") || null
         }
     }
     
-
+    //USER Signin Method
     signIn = (username,password)=>{
         const user = this.data.getUser(username,password)
         .then(user =>{
@@ -32,6 +34,7 @@ export class Provider extends Component{
         return user
     }
 
+    //USER SignOut method
     signOut = ()=>{
         this.setState({
             authenticatedUser: null
@@ -41,6 +44,7 @@ export class Provider extends Component{
         Cookies.remove("userpass");
     }
 
+    //CreateCourse Method
     createCourse = (course)=>{
         
         const newCourse = {
@@ -58,6 +62,7 @@ export class Provider extends Component{
         return addCourses
     }
 
+    //UpdateCourse Method
         updateCourse = async (id,data)=>{
         const {
             emailAddress:username
@@ -71,6 +76,7 @@ export class Provider extends Component{
         })
     }
 
+    //DeleteCourse method
     deleteCourse = (id)=>{
         const {
             emailAddress:username
@@ -87,6 +93,7 @@ export class Provider extends Component{
 
     render(){
 
+        //Pass value to Provider
         const value = {
             data: this.data,
             authenticatedUser: this.state.authenticatedUser,
@@ -100,6 +107,7 @@ export class Provider extends Component{
         }
 
         return(
+            //Render Provider with value
             <Context.Provider value={value}>
                 {this.props.children}
             </Context.Provider>
@@ -110,6 +118,7 @@ export class Provider extends Component{
 export const Consumer = Context.Consumer;
 
 
+//Default Routes with createContext
 export default  (Component)=>{
     return  (props)=>{
         return(

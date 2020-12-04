@@ -17,6 +17,7 @@ class UpdateCourse extends Component{
     componentDidMount = ()=>{
         const {context} = this.props
 
+        //call getCourses method
         context.data.getCourses()
         .then(data =>{
             const id = parseInt(this.props.match.params.id);
@@ -40,18 +41,20 @@ class UpdateCourse extends Component{
                 this.props.history.push('/notfound')
             }
 
-        })
+        })// handle server error
         .catch(err =>{
             this.props.history.push("/error")
             console.log(err)
         })
     }
 
+    //handle cancel button
     cancel = ()=>{
         const id = this.props.match.params.id;
         this.props.history.push(`/course/${id}`);
     }
 
+    //update states value
     change = (e)=>{
         const name = e.target.name;
         const value = e.target.value;
@@ -61,6 +64,7 @@ class UpdateCourse extends Component{
         })
     }
 
+    //handleSubmit function
     handleSubmit = (e)=>{
         e.preventDefault();
         const {context} = this.props;

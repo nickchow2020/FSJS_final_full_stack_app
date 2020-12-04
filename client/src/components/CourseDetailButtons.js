@@ -6,7 +6,7 @@ const CourseDetailButtons = ({authUser,id})=>{
         <div className="actions--bar">
             <div className="bounds">
                 <div className="grid-100">
-                {
+                { // Hide update Course if needed
                     authUser ?
                     <React.Fragment>
                         <span>

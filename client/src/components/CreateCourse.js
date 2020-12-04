@@ -13,6 +13,7 @@ class CreateCourse extends Component {
         }
     }
 
+    //Update the state value according to the input
     change = (e)=>{
         const name = e.target.name
         const value = e.target.value
@@ -22,10 +23,12 @@ class CreateCourse extends Component {
         })
     }
 
+    //cancel button that redirect it to home page
     cancel = ()=>{
         this.props.history.push('/');
     }
 
+    //handle Submit function
     handleSubmit = (e)=>{
         e.preventDefault()
 
@@ -62,6 +65,7 @@ class CreateCourse extends Component {
     }
 
     render(){
+        //constructed the property
         const {
             title,
             description,

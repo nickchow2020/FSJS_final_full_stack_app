@@ -16,12 +16,11 @@ import DeleteCourse from './components/DeleteCourse' // import DeleteCourse comp
 import NotFound from "./components/NotFound"; // import not found!
 import UnhandledError from "./components/UnhandledError"; // import not found!
 
-import Authenticated from "./components/Authenticated" 
-
-import withContext from "./Context";
-import PrivideRoute from "./AuthorizatedRoute";
+import withContext from "./Context"; //import Context 
+import PrivideRoute from "./AuthorizatedRoute"; // import AuthorizationRoute
 
 
+//All Component with Context
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -30,7 +29,8 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const HeaderWithContext = withContext(Header);
 const UserSignOutWithContext = withContext(UserSignOut);
-const DeleteCourseWithContext = withContext(DeleteCourse)
+const DeleteCourseWithContext = withContext(DeleteCourse);
+
 //Set export default to a callback function
 export default function App(){
 
@@ -53,7 +53,6 @@ export default function App(){
       </Switch>
     </Router>
   )
-
 }
 
 

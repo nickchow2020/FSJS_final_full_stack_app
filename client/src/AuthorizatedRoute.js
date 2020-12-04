@@ -4,6 +4,7 @@ import { Consumer } from "./Context";
 
 const PrivideRoute = ({component:Component,...rest})=>{
     return(
+        //Add Consumer to the Private Route
         <Consumer>
             {
                 context =>(

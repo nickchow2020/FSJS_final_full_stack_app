@@ -11,10 +11,12 @@ class UserSignIn extends Component{
         }
     }
 
+    //handle cancel function
     cancel = ()=>{
         this.props.history.push("/")
     }
 
+    //handle submit function
     submit = (e)=>{
         e.preventDefault();
         const {context} = this.props;
@@ -31,6 +33,7 @@ class UserSignIn extends Component{
         })
     }
 
+    //update states value
     change = (e)=>{
         const name = e.target.name;
         const value = e.target.value;   
@@ -41,6 +44,8 @@ class UserSignIn extends Component{
     }
 
     render(){
+
+        //destruct the username and pass from state
         const {
             username,
             password

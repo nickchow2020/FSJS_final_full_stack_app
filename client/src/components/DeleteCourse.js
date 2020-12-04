@@ -28,6 +28,7 @@ class DeleteCourse extends Component {
 
     }
 
+    //update the state course property
     change = (e)=>{
         const name = e.target.name;
         const value = e.target.value;
@@ -37,6 +38,7 @@ class DeleteCourse extends Component {
         })
     }
 
+    //cancel and redirect it back to correct course
     cancel = ()=>{
         const {
             id
@@ -45,6 +47,7 @@ class DeleteCourse extends Component {
         this.props.history.push(`/course/${id}`)
     }
 
+    //handleSubmit function
     handleDelete = (e)=>{
         e.preventDefault();
         const {context} = this.props;
