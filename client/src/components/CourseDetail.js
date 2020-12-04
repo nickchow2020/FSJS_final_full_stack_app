@@ -1,7 +1,6 @@
 import React ,{ Component } from "react"; 
 import CourseDetailBtn from "./CourseDetailButtons" // import the buttons components
-import Course from "./Courses";
-
+import Reactmarkdown from "react-markdown";
 class CourseDetail extends Component {
     
     constructor(){
@@ -44,16 +43,15 @@ class CourseDetail extends Component {
         let detail = description || "" // initial the description to an empty string
         let materials = materialsNeeded || "" // initial the materialsNeeded property to empty string
 
-        const descriptionDetail = detail.split("\n\n") // make description into portion of array
-        const materialsNeed = materials.split("\n*") // make materials into portion of array 
-
-        const materialsList = materialsNeed.map((data,index) => <li key={index}>{data}</li>) // map through the materials array with li tags
-        
         const authorName = `${author.firstName} ${author.lastName}` //form the author's name.
 
         const id = this.props.match.params.id;
 
-        const {id:authId} = theAuthUser;
+        let authId = ""
+
+        if(theAuthUser){
+            authId = theAuthUser.id;
+        }
 
         const {courseAuthorId}=this.state;
 
@@ -61,6 +59,7 @@ class CourseDetail extends Component {
 
         return(
             <React.Fragment>
+                
                 <CourseDetailBtn authUser={authUser} id={id}/>
                 <div className="bounds course--detail">
                     <div className="grid-66">
@@ -70,9 +69,7 @@ class CourseDetail extends Component {
                             <p>By {authorName}</p>
                         </div>
                         <div className="course--description">
-                        { //convert description arrow into list paragraph tags
-                            descriptionDetail.map((desc,index) => <p key={index}>{desc}</p>)
-                        }
+                            <Reactmarkdown children={detail}/>
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
@@ -85,8 +82,7 @@ class CourseDetail extends Component {
                                 <li className="course--stats--list--item">
                                     <h4>Materials Needed</h4>
                                     <ul> 
-                                        {/* Display the material list*/}
-                                        {materialsList}
+                                        <Reactmarkdown children={materials}/>
                                     </ul>
                                 </li>
                             </ul>

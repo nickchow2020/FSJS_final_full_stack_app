@@ -37,7 +37,8 @@ export class Provider extends Component{
             authenticatedUser: null
         })
 
-        Cookies.remove("authenticatedUser")
+        Cookies.remove("authenticatedUser");
+        Cookies.remove("userpass");
     }
 
     createCourse = (course)=>{
