@@ -1,5 +1,6 @@
 import React,{Component}from "react";
 import {Link} from 'react-router-dom';
+
 class UserSignIn extends Component{
 
     constructor(){
@@ -22,7 +23,7 @@ class UserSignIn extends Component{
         const {context} = this.props;
         const {username,password} = this.state; 
         //redirect it back to it's previous route
-        const {from} = this.props.location.state || {from : {pathname:"/"}};
+        const {from} = this.props.location.state || {from : {pathname:"/userNotfound"}};
 
         //call signIn method
         context.actions.signIn(username,password)

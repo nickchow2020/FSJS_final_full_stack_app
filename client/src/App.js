@@ -18,7 +18,7 @@ import UnhandledError from "./components/UnhandledError"; // import not found!
 import Forbidden from "./components/Forbidden" // import Forbidden
 import withContext from "./Context"; //import Context 
 import PrivateRoute from "./AuthorizationRoute"; // import AuthorizationRoute
-
+import UserNotFound from "./components/UserNotFound"; // import user not found
 
 //All Component with Context
 const CoursesWithContext = withContext(Courses); //Course component withContext
@@ -50,6 +50,7 @@ export default function App(){
         <Route path="/notfound" component={NotFound} />
         <Route path="/forbidden" component={Forbidden}/>
         <Route path="/error" component={UnhandledError} />
+        <Route path="/userNotfound" component={UserNotFound} />
       </Switch>
     </Router>
   )
