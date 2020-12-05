@@ -434,7 +434,7 @@ p {
 .course--header .course--title {
   font-size: 48px;
   margin-bottom: 15px;
-  color: #332a40;
+  color:tomato
 }
 /* line 171, ../sass/global.sass */
 .course--header p {
