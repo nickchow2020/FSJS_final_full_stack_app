@@ -15,31 +15,49 @@ class UpdateCourse extends Component{
     }
 
     componentDidMount = ()=>{
+        //get context
         const {context} = this.props
+
+        //get authenticate user id
+        const authID = context.authenticatedUser.id
 
         //call getCourses method
         context.data.getCourses()
         .then(data =>{
+            //get current id params value
             const id = parseInt(this.props.match.params.id);
+
+            //find the current course data
             const course = data.find(data => data.id === id);
             if(course){
+                //if course exist grab course properties
                 const {
                     title,
                     description,
                     estimatedTime,
                     materialsNeeded,
-                
+                    authenticateUser
                 } = course;
     
+                //set state properties value
                 this.setState({
                     title,
                     description,
                     estimatedTime,
                     materialsNeeded,
                 })
-            }else{
-                this.props.history.push('/notfound')
-            }
+
+                //get authenticated user id
+                const courseCreatorId = authenticateUser.id
+
+
+                //check if the course is own by user
+                if(authID !== courseCreatorId){
+                    this.props.history.push('/forbidden')
+                }
+                }else{
+                    this.props.history.push('/notfound')
+                }
 
         })// handle server error
         .catch(err =>{
@@ -67,8 +85,11 @@ class UpdateCourse extends Component{
     //handleSubmit function
     handleSubmit = (e)=>{
         e.preventDefault();
+
+        //get context
         const {context} = this.props;
 
+        // get course properties from state
         const {
             title,
             description,
@@ -76,6 +97,7 @@ class UpdateCourse extends Component{
             materialsNeeded
         } = this.state
 
+        //create a new properties object
         const data = {
             title,
             description,
@@ -83,19 +105,24 @@ class UpdateCourse extends Component{
             materialsNeeded
         }
 
+        //get current course id
         const id = this.props.match.params.id
 
+        //call updateCourse method
         context.actions.updateCourse(id,data)
         .then(errors =>{
+            //check the validation errors
             if(errors.length > 0){
                 this.setState({
                     errors
                 })
             }else{
+                //push it's back to previous course when cancel
                 this.props.history.push(`/course/${id}`)
             }
         })
         .catch(err =>{
+            //handle error
             this.props.history.push("/error")
             console.log(err)
         })
@@ -114,6 +141,7 @@ class UpdateCourse extends Component{
             errors
         } = this.state
 
+        // if errors occurs
         const hasErrors = errors.length > 0 
 
         return(
@@ -157,7 +185,7 @@ class UpdateCourse extends Component{
                         </div>
                         <div className="grid-100 pad-bottom">
                             <button className="button" type="submit">Update Course</button>
-                            <button className="button button-secondary" onClick={this.cancel}>Cancel</button>
+                            <button className="button button-secondary" onClick={this.cancel} type="button">Cancel</button>
                         </div>
                     </form>
                 </div>

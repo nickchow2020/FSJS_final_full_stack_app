@@ -1,44 +1,50 @@
-import React ,{ Component } from "react"; 
+import React ,{ Component } from "react"; // import React
 import CourseDetailBtn from "./CourseDetailButtons"; // import the buttons components
-import Reactmarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";// import ReactMarkDown
 class CourseDetail extends Component {
     
     constructor(){
         super()
         this.state = {
             course: {}, //initially the course state to an object
-            courseAuthorId : ""
+            courseAuthorId : "" //initial courseAuthId to empty string
         }
     }
 
     componentDidMount = ()=>{
         // Update all the course to data accordingly with ID 
 
-        const {context} = this.props;
-        const id = parseInt(this.props.match.params.id);
+        const {context} = this.props; // import context
+        const id = parseInt(this.props.match.params.id); //convert params id to number with parseInt
 
+        //call Data's getCourses()
         context.data.getCourses()
         .then(data =>{
+            //find responding course with find()
             const targetCourse = data.find(data => data.id === id);
             if(targetCourse){
+                //if responding course exist
                 this.setState({
                     course: targetCourse,
                     courseAuthorId : targetCourse.authenticateUser.id
                 });
+                //if responding course not found
             }else{
                 this.props.history.push('/notfound')
             }
         })
         .catch(err =>{
+            //render error component when catch error
             this.props.history.push('/error');
             console.log(err);
         })
     }
 
     render(){
-        const {context} = this.props;
+        const {context} = this.props; // get Authorization User from Context
         const theAuthUser = context.authenticatedUser;
-        //Destructed the course properteis,title,description,estimatedTime,materialsNeeded and authenticateUser
+
+        //Destructed the course properties,title,description,estimatedTime,materialsNeeded and authenticateUser
         const {
             title,
             description,
@@ -53,16 +59,19 @@ class CourseDetail extends Component {
 
         const authorName = `${author.firstName} ${author.lastName}` //form the author's name.
 
-        const id = this.props.match.params.id;
+        const id = this.props.match.params.id; // get current Id value
 
-        let authId = ""
+        let authId = "" // initial authId to empty string
 
         if(theAuthUser){
-            authId = theAuthUser.id;
+            //if authorization user id not null
+            authId = theAuthUser.id; 
         }
 
+        //Get courseAuthorId from state
         const {courseAuthorId}=this.state;
 
+        //check user authorization 
         const authUser = authId === courseAuthorId;
 
         return(
@@ -77,7 +86,7 @@ class CourseDetail extends Component {
                             <p>By {authorName}</p>
                         </div>
                         <div className="course--description">
-                            <Reactmarkdown children={detail}/>
+                            <ReactMarkdown children={detail}/>
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
@@ -90,7 +99,7 @@ class CourseDetail extends Component {
                                 <li className="course--stats--list--item">
                                     <h4>Materials Needed</h4>
                                     <ul> 
-                                        <Reactmarkdown children={materials}/>
+                                        <ReactMarkdown children={materials}/>
                                     </ul>
                                 </li>
                             </ul>

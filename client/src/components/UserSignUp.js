@@ -41,13 +41,16 @@ class UserSignUp extends Component{
             password
         }
 
-        //create the call the user signUp method
+        //call Data's createUser method
         context.data.createUser(user)
+
+        //if validation error occurs
         .then(errors => {
             if(errors.length){
                 this.setState({errors})
                 console.log(errors)
             }else{
+                //call signIn method
                 context.actions.signIn(emailAddress,password)
                 .then(()=>{
                     this.props.history.push('/')
@@ -55,6 +58,7 @@ class UserSignUp extends Component{
             }
         })
         .catch(err =>{
+            //handle errors
             this.props.history.push("/error")
             console.log(err)
         })
@@ -81,8 +85,10 @@ class UserSignUp extends Component{
             confirmPassword
         } = this.state;
 
+        //get errors array from this.state
         const {errors} = this.state;
 
+        //check if the error occurs
         const hasErrors = errors.length > 0;
 
 

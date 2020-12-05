@@ -1,5 +1,5 @@
-import React,{Component}from "react"
-
+import React,{Component}from "react";
+import {Link} from 'react-router-dom';
 class UserSignIn extends Component{
 
     constructor(){
@@ -21,13 +21,17 @@ class UserSignIn extends Component{
         e.preventDefault();
         const {context} = this.props;
         const {username,password} = this.state; 
+        //redirect it back to it's previous route
         const {from} = this.props.location.state || {from : {pathname:"/"}};
 
+        //call signIn method
         context.actions.signIn(username,password)
         .then(() =>{
+            //push it back to previous course
                 this.props.history.push(from)
             })
         .catch(err =>{
+            //push it back to error routes
             this.props.history.push("/error")
             console.log(err)
         })
@@ -65,12 +69,12 @@ class UserSignIn extends Component{
                             </div>
                             <div className="grid-100 pad-bottom">
                                 <button className="button" type="submit">Sign In</button>
-                                <button className="button button-secondary" onClick={this.cancel}>Cancel</button>
+                                <button className="button button-secondary" type="button" onClick={this.cancel}>Cancel</button>
                             </div>
                         </form>
                     </div>
                     <p>&nbsp;</p>
-                    <p>Don't have a user account? <a href="sign-up.html">Click here</a> to sign up!</p>
+                    <p>Don't have a user account? <Link to='/signUp'>Click here</Link> to sign up!</p>
                 </div>
             </div>
         )

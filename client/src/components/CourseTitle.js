@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 
 const CourseTitle = ({course})=>{    
 
-    const courseRoute = `/course/${course.id}`
+    //set course url
+    const courseRoute = `/course/${course.id}`;
 
     return(
         <div className="grid-33">

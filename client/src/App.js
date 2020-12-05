@@ -15,21 +15,21 @@ import UserSignOut from "./components/UserSignOut" // import UserSignOut compone
 import DeleteCourse from './components/DeleteCourse' // import DeleteCourse component
 import NotFound from "./components/NotFound"; // import not found!
 import UnhandledError from "./components/UnhandledError"; // import not found!
-
+import Forbidden from "./components/Forbidden" // import Forbidden
 import withContext from "./Context"; //import Context 
-import PrivideRoute from "./AuthorizatedRoute"; // import AuthorizationRoute
+import PrivateRoute from "./AuthorizationRoute"; // import AuthorizationRoute
 
 
 //All Component with Context
-const CoursesWithContext = withContext(Courses);
-const CourseDetailWithContext = withContext(CourseDetail);
-const UserSignUpWithContext = withContext(UserSignUp);
-const UserSinInWithContext = withContext(UserSignIn);
-const CreateCourseWithContext = withContext(CreateCourse);
-const UpdateCourseWithContext = withContext(UpdateCourse);
-const HeaderWithContext = withContext(Header);
-const UserSignOutWithContext = withContext(UserSignOut);
-const DeleteCourseWithContext = withContext(DeleteCourse);
+const CoursesWithContext = withContext(Courses); //Course component withContext
+const CourseDetailWithContext = withContext(CourseDetail); //CourseDetail component withContext
+const UserSignUpWithContext = withContext(UserSignUp); //UserSignUp component withContext
+const UserSinInWithContext = withContext(UserSignIn);//UserSignIn component withContext
+const CreateCourseWithContext = withContext(CreateCourse); //CreateCourse component withContext
+const UpdateCourseWithContext = withContext(UpdateCourse); //UpdateCourse component withContext
+const HeaderWithContext = withContext(Header); // Header component withContext
+const UserSignOutWithContext = withContext(UserSignOut); // UserSignOut withContext
+const DeleteCourseWithContext = withContext(DeleteCourse); // DeleteCourse withContext
 
 //Set export default to a callback function
 export default function App(){
@@ -45,10 +45,10 @@ export default function App(){
         <Route path="/signIn" component={UserSinInWithContext} />
         <Route path='/signOut' component={UserSignOutWithContext} />
         <Route path="/courses/:id/delete" component={DeleteCourseWithContext} />
-        <PrivideRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
-        <PrivideRoute path="/courses/create" component={CreateCourseWithContext} />
+        <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
+        <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
         <Route path="/notfound" component={NotFound} />
-        <Route path="/forbidden" />
+        <Route path="/forbidden" component={Forbidden}/>
         <Route path="/error" component={UnhandledError} />
       </Switch>
     </Router>

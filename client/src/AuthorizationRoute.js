@@ -2,7 +2,7 @@ import React from "react";
 import {Route,Redirect} from "react-router-dom";
 import { Consumer } from "./Context";
 
-const PrivideRoute = ({component:Component,...rest})=>{
+const PrivateRoute = ({component:Component,...rest})=>{
     return(
         //Add Consumer to the Private Route
         <Consumer>
@@ -14,7 +14,7 @@ const PrivideRoute = ({component:Component,...rest})=>{
                             <Component {...props} />
                         ):(
                             <Redirect to={{
-                                pathname: '/signin',
+                                pathname: '/signIn',
                                 state: { from:props.location }
                             }} />
                         )}
@@ -26,4 +26,4 @@ const PrivideRoute = ({component:Component,...rest})=>{
     )
 }
 
-export default PrivideRoute;
+export default PrivateRoute;

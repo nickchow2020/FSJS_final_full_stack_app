@@ -65,7 +65,7 @@ class CreateCourse extends Component {
     }
 
     render(){
-        //constructed the property
+
         const {
             title,
             description,
@@ -73,14 +73,14 @@ class CreateCourse extends Component {
             materialsNeeded
         } = this.state
 
-        const {errors} = this.state
+        const {errors} = this.state // get Errors from state
 
-        const hasErrors = errors.length > 0;
+        const hasErrors = errors.length > 0; // if error occurs
 
         return(
         <div>
             <form onSubmit={this.handleSubmit}>
-            {
+            {//show error message if error occurs
                 hasErrors ? <ValidationError errors={errors}/> : null
             }
                 <div className="grid-66"> 
@@ -93,7 +93,7 @@ class CreateCourse extends Component {
                     </div>
                     <div className="course--description">
                         <div>
-                            <textarea id="description" name="description" className="" onChange={this.change} value={description} placeholder="Course description..."></textarea>
+                            <textarea id="description" name="description" onChange={this.change} value={description} placeholder="Course description..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ class CreateCourse extends Component {
                 </div>
                 <div className="grid-100 pad-bottom">
                     <button className="button" type="submit">Create Course</button>
-                    <button className="button button-secondary" onClick={this.cancel}>Cancel</button>
+                    <button className="button button-secondary" onClick={this.cancel} type="button" >Cancel</button>
                 </div>
             </form>
         </div>

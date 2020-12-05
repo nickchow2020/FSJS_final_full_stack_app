@@ -9,7 +9,6 @@ const NotFound = ()=>{
             <hr />
             <Link className="button" to={`/`}>Go Back</Link>
         </div>
-
     )
 }
 

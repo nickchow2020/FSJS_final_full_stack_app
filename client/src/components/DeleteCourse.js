@@ -10,16 +10,18 @@ class DeleteCourse extends Component {
     }
 
     componentDidMount = ()=>{
+        //convert id to number
         const id = parseInt(this.props.match.params.id)
         const {context} = this.props;
 
+        //find the responded course data and updated it to this.state
         context.data.getCourses()
         .then(data => {
             const deleteCourse = data.find(data => data.id === id)
             this.setState({
                 deleteCourse
             })
-        })
+        })//catch errors
         .catch(err =>{
             this.props.history.push("/error")
             console.log(err)
@@ -52,12 +54,12 @@ class DeleteCourse extends Component {
         e.preventDefault();
         const {context} = this.props;
 
-        const deleteTitle = this.state.title;
+        const deleteTitle = this.state.title;//get title from state
 
-        const {title,id} = this.state.deleteCourse;
-
+        const {title,id} = this.state.deleteCourse; // get title and id from state deleteCourse
 
         if(deleteTitle === title){
+            // if titles are match delete the course
             context.actions.deleteCourse(id)
             this.props.history.push('/')
         };
@@ -69,6 +71,7 @@ class DeleteCourse extends Component {
             title
         } = this.state
 
+        //get title from deleteCourse in state
         const deleteCourseTitle = this.state.deleteCourse.title
 
         return(
@@ -84,7 +87,7 @@ class DeleteCourse extends Component {
                     </div>
                     <div className="grid-100 pad-bottom">
                         <button className="button" type="submit">Delete Course</button>
-                        <button className="button button-secondary" onClick={this.cancel}>Cancel</button>
+                        <button className="button button-secondary" onClick={this.cancel} type="button">Cancel</button>
                     </div>
                 </form>
             </div>

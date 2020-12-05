@@ -5,6 +5,7 @@ export default class Course extends Component{
 
     constructor(){
         super()
+        //initial allCourses property to empty array
         this.state = {
             allCourses : []
         }
@@ -16,6 +17,7 @@ export default class Course extends Component{
         const {context} = this.props 
 
         //call getCourses() when component it mounted
+        //update allCourse property
         context.data.getCourses()
         .then(data =>{
             this.setState({
@@ -30,7 +32,7 @@ export default class Course extends Component{
 
 
     render(){
-        //Retrieve all Courses Data from context
+        //Retrieve all Courses Data from state
         const courses = this.state.allCourses
         return(
             <div className="bounds">  
