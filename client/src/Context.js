@@ -31,6 +31,8 @@ export class Provider extends Component{
                 const encryptedPass = btoa(password) // encrypted password
                 Cookies.set("userpass",encryptedPass,{expires: 1}) // store encrypted password into cookies
                 Cookies.set("authenticatedUser",JSON.stringify(user),{expires: 1}) // store Authorization Data into Cookie
+            }else{
+                return user
             }
         })
         return user // return Promisee from getUser method

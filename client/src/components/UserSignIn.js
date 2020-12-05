@@ -8,7 +8,8 @@ class UserSignIn extends Component{
         this.state = {
             username: "",
             password: "",
-            errors: []
+            errors: [],
+            hasAuth: false
         }
     }
 
@@ -23,13 +24,19 @@ class UserSignIn extends Component{
         const {context} = this.props;
         const {username,password} = this.state; 
         //redirect it back to it's previous route
-        const {from} = this.props.location.state || {from : {pathname:"/userNotfound"}};
+        const {from} = this.props.location.state || {from : {pathname:"/"}};
 
         //call signIn method
         context.actions.signIn(username,password)
-        .then(() =>{
+        .then(data =>{
             //push it back to previous course
-                this.props.history.push(from)
+                if(data !== null){
+                    this.props.history.push(from)
+                }else{
+                    this.setState({
+                        hasAuth: !this.state.hasAuth
+                    })
+                }
             })
         .catch(err =>{
             //push it back to error routes
@@ -56,12 +63,20 @@ class UserSignIn extends Component{
             password
         } = this.state
 
+        const {hasAuth} = this.state
+
         return(
             <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign In</h1>
                     <div>
                         <form onSubmit={this.submit}>
+                        <div className="validation-errors">
+                        {
+                            hasAuth ? <ul><li className="validationError">Password or UserSignIn incorrect</li></ul> : null
+                        }
+                            
+                        </div>
                             <div>
                                 <input id="emailAddress" name="username" type="text" placeholder="Email Address" onChange={this.change} value={username}/>
                             </div>
