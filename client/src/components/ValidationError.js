@@ -7,7 +7,7 @@ const ValidationError = ({errors})=>{
             <div className="validation-errors">
                 <ul>
                 {
-                    errors.map((data,key) => <li key={key}>{data}</li>)
+                    errors.map((data,key) => <li className="validationError" key={key}>{data}</li>)
                 }
                 </ul>
             </div>
