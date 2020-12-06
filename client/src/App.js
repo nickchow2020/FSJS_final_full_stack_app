@@ -40,9 +40,9 @@ export default function App(){
       <Switch>
         <Route exact path="/" component={CoursesWithContext} />
         <Route path="/course/:id" component={CourseDetailWithContext} />
-        <Route path="/signUp" component={UserSignUpWithContext} />
-        <Route path="/signIn" component={UserSinInWithContext} />
-        <Route path='/signOut' component={UserSignOutWithContext} />
+        <Route path="/signup" component={UserSignUpWithContext} />
+        <Route path="/signin" component={UserSinInWithContext} />
+        <Route path='/signout' component={UserSignOutWithContext} />
         <Route path="/courses/:id/delete" component={DeleteCourseWithContext} />
         <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
         <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />

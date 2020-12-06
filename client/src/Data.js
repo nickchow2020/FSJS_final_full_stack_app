@@ -36,6 +36,18 @@ export default class Data{
         }
     }
 
+    //GET single course method 
+    async getCourse (id){
+        const response = await this.api(`/courses/${id}`,"GET")
+        if(response.status === 200){
+            return response.json().then(data => data.course[0]);
+        }else if (response.status === 500){
+            return null
+        }else{
+            throw new Error();
+        }
+    }
+
     //Create a new User
     async createUser (user){
         const response = await this.api("/users","POST",user);
@@ -66,13 +78,13 @@ export default class Data{
     async createCourse (course,username,password){
         const response = await this.api("/courses","POST",course,true,{username,password})
         if(response.status === 201){
-            return []
+            return [];
         }else if (response.status === 400){
             return response.json().then(data => {
-                return data.message
+                return data.message;
             })
         }else{
-            throw new Error()
+            throw new Error();
         }
     }
 

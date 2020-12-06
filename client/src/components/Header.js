@@ -14,13 +14,13 @@ const app = (props)=> {
                 {
                     authUser ? 
                     <React.Fragment>
-                        <span>Hi,there Welcome: {authUser.lastName}</span>
+                        <span>Hi,there Welcome: {`${authUser.lastName},${authUser.firstName}`}</span>
                         <Link className="signout" to="/signOut">Sign Out</Link>
                     </React.Fragment>
                     :
                     <React.Fragment>
-                        <Link className="signup" to="/signUp">Sign Up</Link>
-                        <Link className="signin" to="/signIn">Sign In</Link>
+                        <Link className="signup" to="/signup">Sign Up</Link>
+                        <Link className="signin" to="/signin">Sign In</Link>
                     </React.Fragment>
                 }
             </nav>

@@ -1,5 +1,5 @@
 import React,{Component} from "react"; 
-import {Link} from "react-router-dom";
+import {Link,Redirect} from "react-router-dom";
 import CourseTitle from "./CourseTitle";
 export default class Course extends Component{
 
@@ -33,7 +33,8 @@ export default class Course extends Component{
 
     render(){
         //Retrieve all Courses Data from state
-        const courses = this.state.allCourses
+        const courses = this.state.allCourses || []
+
         return(
             <div className="bounds">  
                 {

@@ -6,8 +6,8 @@ class CourseDetail extends Component {
     constructor(){
         super()
         this.state = {
-            course: {}, //initially the course state to an object
-            courseAuthorId : "" //initial courseAuthId to empty string
+            course: {},//initially the course state to an object
+            courseAuthorId : 0 //initial courseAuthId to empty string
         }
     }
 
@@ -17,11 +17,12 @@ class CourseDetail extends Component {
         const {context} = this.props; // import context
         const id = parseInt(this.props.match.params.id); //convert params id to number with parseInt
 
-        //call Data's getCourses()
-        context.data.getCourses()
+        //call Data's getCourse()
+        context.data.getCourse(id)
         .then(data =>{
-            //find responding course with find()
-            const targetCourse = data.find(data => data.id === id);
+            //if data return not equal to null
+            if(data !== null){
+            const targetCourse = data;
             if(targetCourse){
                 //if responding course exist
                 this.setState({
@@ -32,6 +33,10 @@ class CourseDetail extends Component {
             }else{
                 this.props.history.push('/notfound')
             }
+        }else{
+            //if it's null push to error
+            this.props.history.push("/error")
+        }
         })
         .catch(err =>{
             //render error component when catch error
@@ -73,7 +78,7 @@ class CourseDetail extends Component {
 
         //check user authorization 
         const authUser = authId === courseAuthorId;
-
+        
         return(
             <React.Fragment>
                 
