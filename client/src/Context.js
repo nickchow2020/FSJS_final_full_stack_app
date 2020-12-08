@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import Data from "./Data";
 import Cookies from "js-cookie";
+import axios from 'axios';
 
 //Create Context
 const Context = React.createContext(); 
@@ -13,8 +14,7 @@ export class Provider extends Component{
         this.data = new Data() // call Data Class
         this.state = {
             //initial Auth USER  to null
-            authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
-            delete: true
+            authenticatedUser: Cookies.getJSON("authenticatedUser") || null
         }
     }
     
@@ -106,7 +106,6 @@ export class Provider extends Component{
             if(data !== null){
                 console.log("deleted!")
             }
-
         })
     }
 

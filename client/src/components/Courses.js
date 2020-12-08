@@ -1,6 +1,7 @@
-import React,{Component} from "react"; 
-import {Link,Redirect} from "react-router-dom";
+import React,{Component} from "react";
+import {Link} from "react-router-dom";
 import CourseTitle from "./CourseTitle";
+import axios from "axios";
 export default class Course extends Component{
 
     constructor(){
@@ -13,23 +14,12 @@ export default class Course extends Component{
 
     
     componentDidMount = ()=>{
-        const {context} = this.props 
-
-        //call getCourses() when component it mounted
-        //update allCourse property
-        context.data.getCourses()
-        .then(data =>{
-            console.log(data)
+        axios.get("http://localhost:5000/api/courses/")
+        .then(data =>{  
             this.setState({
-                allCourses: data
+                allCourses: data.data.allCourses
             })
-        })//catch error
-        .catch(err=>{
-            this.props.history.push('/error');
-            console.log(err);
         })
-
-        console.log('YES')
     }
 
 

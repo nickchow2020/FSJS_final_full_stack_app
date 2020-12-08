@@ -26,16 +26,6 @@ export default class Data{
         return fetch(fetchUrl,options)
     }
 
-    //GET all courses method
-    async getCourses (){
-        const response = await this.api("/courses","GET");
-        if(response.status === 200){
-            return response.json().then(data => data.allCourses);
-        }else{
-            console.log(response);
-        }
-    }
-
     //GET single course method 
     async getCourse (id){
         const response = await this.api(`/courses/${id}`,"GET")

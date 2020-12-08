@@ -1,4 +1,5 @@
 import React,{Component}from "react";
+import axios from "axios";
 import Course from "./Courses";
 
 class DeleteCourse extends Component {
@@ -17,26 +18,22 @@ class DeleteCourse extends Component {
     componentDidMount = ()=>{
         //convert id to number
         const id = parseInt(this.props.match.params.id)
-        const {context} = this.props;
-
-        //find the responded course data and updated it to this.state
-        context.data.getCourses()
-        .then(data => {
-            console.log(data)
-            const deleteCourse = data.find(data => data.id === id)
-            console.log(deleteCourse)
+        
+        axios.get(`http://localhost:5000/api/courses/${id}`)
+        .then(data =>{
+            const deleteCourse = data.data.course[0]
             this.setState({
-                title: deleteCourse.title,
-                description: deleteCourse.description,
-                estimatedTime : deleteCourse.estimatedTime,
-                materialsNeeded : deleteCourse.materialsNeeded,
-                id: deleteCourse.id
+                "title":deleteCourse.title,
+                "description": deleteCourse.description,
+                "estimatedTime" :deleteCourse.estimatedTime,
+                "materialsNeeded": deleteCourse.materialsNeeded,
+                "id":deleteCourse.id
             })
-        })//catch errors
-        .catch(err =>{
-            this.props.history.push("/error")
-            console.log(err)
+            console.log(deleteCourse)
         })
+
+        //find the responded course data and updated it to this.state   
+
     }
 
     //update the state course property

@@ -1,6 +1,6 @@
 import React,{Component} from "react" 
 import ValidationError from "./ValidationError";
-
+import axios from 'axios';
 
 class UpdateCourse extends Component{
     constructor(){
@@ -22,13 +22,11 @@ class UpdateCourse extends Component{
         const authID = context.authenticatedUser.id
 
         //call getCourses method
-        context.data.getCourses()
-        .then(data =>{
-            //get current id params value
-            const id = parseInt(this.props.match.params.id);
 
-            //find the current course data
-            const course = data.find(data => data.id === id);
+        const id = this.props.match.params.id;
+        axios.get(`http://localhost:5000/api/courses/${id}`)
+        .then(data =>{
+            const course = data.data.course[0]
             if(course){
                 //if course exist grab course properties
                 const {
@@ -49,7 +47,6 @@ class UpdateCourse extends Component{
 
                 //get authenticated user id
                 const courseCreatorId = authenticateUser.id
-
 
                 //check if the course is own by user
                 if(authID !== courseCreatorId){
