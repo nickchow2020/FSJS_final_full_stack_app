@@ -19,6 +19,10 @@ export default class Course extends Component{
                 allCourses: data.data.allCourses
             })
         })
+        .catch(err =>{
+            this.props.history.push("/error")
+            console.log(err)
+        })
     }
 
     render(){
