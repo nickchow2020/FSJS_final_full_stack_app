@@ -81,6 +81,7 @@ class DeleteCourse extends Component {
             // if titles are match delete the course
             context.actions.deleteCourse(id,course)
             this.props.history.push('/')
+            window.location.href = '/';
         };
 
         console.log(course)

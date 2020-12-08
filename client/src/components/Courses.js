@@ -2,8 +2,8 @@ import React,{Component} from "react";
 import {Link} from "react-router-dom";
 import CourseTitle from "./CourseTitle";
 import axios from "axios";
-export default class Course extends Component{
 
+export default class Course extends Component{
     constructor(){
         super()
         //initial allCourses property to empty array
@@ -11,7 +11,6 @@ export default class Course extends Component{
             allCourses : []
         }
     }
-
     
     componentDidMount = ()=>{
         axios.get("http://localhost:5000/api/courses/")
@@ -21,7 +20,6 @@ export default class Course extends Component{
             })
         })
     }
-
 
     render(){
         //Retrieve all Courses Data from state
