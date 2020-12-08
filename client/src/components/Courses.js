@@ -9,7 +9,6 @@ export default class Course extends Component{
         this.state = {
             allCourses : []
         }
-
     }
 
     
@@ -20,6 +19,7 @@ export default class Course extends Component{
         //update allCourse property
         context.data.getCourses()
         .then(data =>{
+            console.log(data)
             this.setState({
                 allCourses: data
             })
@@ -28,13 +28,15 @@ export default class Course extends Component{
             this.props.history.push('/error');
             console.log(err);
         })
+
+        console.log('YES')
     }
 
 
     render(){
         //Retrieve all Courses Data from state
-        const courses = this.state.allCourses || []
-
+        const courses = this.state.allCourses || [];
+        console.log(courses);
         return(
             <div className="bounds">  
                 {

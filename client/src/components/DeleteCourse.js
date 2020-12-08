@@ -1,11 +1,16 @@
 import React,{Component}from "react";
+import Course from "./Courses";
 
 class DeleteCourse extends Component {
     constructor(){
         super()
         this.state = {
+            deleteTitle: "",
             title: "",
-            deleteCourse : {}
+            description: "",
+            estimatedTime:"",
+            materialsNeeded:"",
+            id:"",
         }
     }
 
@@ -17,17 +22,21 @@ class DeleteCourse extends Component {
         //find the responded course data and updated it to this.state
         context.data.getCourses()
         .then(data => {
+            console.log(data)
             const deleteCourse = data.find(data => data.id === id)
+            console.log(deleteCourse)
             this.setState({
-                deleteCourse
+                title: deleteCourse.title,
+                description: deleteCourse.description,
+                estimatedTime : deleteCourse.estimatedTime,
+                materialsNeeded : deleteCourse.materialsNeeded,
+                id: deleteCourse.id
             })
         })//catch errors
         .catch(err =>{
             this.props.history.push("/error")
             console.log(err)
         })
-
-
     }
 
     //update the state course property
@@ -44,7 +53,7 @@ class DeleteCourse extends Component {
     cancel = ()=>{
         const {
             id
-        } = this.state.deleteCourse
+        } = this.state
 
         this.props.history.push(`/course/${id}`)
     }
@@ -54,25 +63,41 @@ class DeleteCourse extends Component {
         e.preventDefault();
         const {context} = this.props;
 
-        const deleteTitle = this.state.title;//get title from state
+        const {
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded,
+            id,
+            deleteTitle
+        } = this.state
 
-        const {title,id} = this.state.deleteCourse; // get title and id from state deleteCourse
+        const course = {
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded,
+            id
+        }
 
         if(deleteTitle === title){
             // if titles are match delete the course
-            context.actions.deleteCourse(id)
+            context.actions.deleteCourse(id,course)
             this.props.history.push('/')
         };
+
+        console.log(course)
+        console.log(deleteTitle)
     }
     
     render(){
 
         const {
-            title
+            deleteTitle
         } = this.state
 
         //get title from deleteCourse in state
-        const deleteCourseTitle = this.state.deleteCourse.title
+        const deleteCourseTitle = this.state.title
 
         return(
             <div className="bounds course--detail">
@@ -83,7 +108,7 @@ class DeleteCourse extends Component {
 
                 <form onSubmit={this.handleDelete}>
                     <div>
-                        <input name="title" placeholder="Enter Title to Confirm Delete" className="deleteFrom" value={title} onChange={this.change} />
+                        <input name="deleteTitle" placeholder="Enter Title to Confirm Delete" className="deleteFrom" value={deleteTitle} onChange={this.change} />
                     </div>
                     <div className="grid-100 pad-bottom">
                         <button className="button" type="submit">Delete Course</button>

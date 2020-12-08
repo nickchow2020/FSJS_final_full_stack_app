@@ -78,7 +78,9 @@ class CreateCourse extends Component {
         const hasErrors = errors.length > 0; // if error occurs
 
         return(
-        <div>
+        <div className="bounds course--detail">
+        <h1>Create Course</h1>
+        <div >
             <form onSubmit={this.handleSubmit}>
             {//show error message if error occurs
                 hasErrors ? <ValidationError errors={errors}/> : null
@@ -121,6 +123,7 @@ class CreateCourse extends Component {
                     <button className="button button-secondary" onClick={this.cancel} type="button" >Cancel</button>
                 </div>
             </form>
+        </div>
         </div>
         )
     }

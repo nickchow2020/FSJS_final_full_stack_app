@@ -13,7 +13,8 @@ export class Provider extends Component{
         this.data = new Data() // call Data Class
         this.state = {
             //initial Auth USER  to null
-            authenticatedUser: Cookies.getJSON("authenticatedUser") || null
+            authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
+            delete: true
         }
     }
     
@@ -91,7 +92,7 @@ export class Provider extends Component{
     }
 
     //DeleteCourse method
-    deleteCourse = (id)=>{
+    deleteCourse = (id,course)=>{
         const {//Get Username
             emailAddress:username
         } = this.state.authenticatedUser
@@ -100,10 +101,12 @@ export class Provider extends Component{
         const password = atob(Cookies.get("userpass"))
 
         //Call deleteCourse method
-        this.data.deleteCourse(id,username,password)
-        .catch(err =>{
-            this.props.history.push("/error")
-            console.log(err)
+        this.data.deleteCourse(id,course,username,password)
+        .then(data =>{
+            if(data !== null){
+                console.log("deleted!")
+            }
+
         })
     }
 
