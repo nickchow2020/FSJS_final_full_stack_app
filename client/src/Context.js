@@ -92,7 +92,7 @@ export class Provider extends Component{
     }
 
     //DeleteCourse method
-    deleteCourse = (id,course)=>{
+    deleteCourse = async (id,course)=>{
         const {//Get Username
             emailAddress:username
         } = this.state.authenticatedUser
@@ -101,11 +101,9 @@ export class Provider extends Component{
         const password = atob(Cookies.get("userpass"))
 
         //Call deleteCourse method
-        this.data.deleteCourse(id,course,username,password)
+        await this.data.deleteCourse(id,course,username,password)
         .then(data =>{
-            if(data !== null){
-                console.log("deleted!")
-            }
+            return data;
         })
     }
 

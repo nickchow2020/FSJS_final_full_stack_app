@@ -12,13 +12,14 @@ export default class Course extends Component{
         }
     }
     
+    //get courses each time when course component is mounted
     componentDidMount = ()=>{
         axios.get("http://localhost:5000/api/courses/")
         .then(data =>{  
             this.setState({
                 allCourses: data.data.allCourses
             })
-        })
+        })//catch error
         .catch(err =>{
             this.props.history.push("/error")
             console.log(err)

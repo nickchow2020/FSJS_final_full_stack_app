@@ -80,12 +80,16 @@ class DeleteCourse extends Component {
         if(deleteTitle === title){
             // if titles are match delete the course
             context.actions.deleteCourse(id,course)
-            this.props.history.push('/')
-            window.location.href = '/';
+            .then( () =>{
+                this.props.history.push('/')
+                window.location.href = '/';
+            })
+            .catch(err =>{
+                //handle error 500
+                this.props.history.push("/error")
+                console.log(err)
+            })
         };
-
-        console.log(course)
-        console.log(deleteTitle)
     }
     
     render(){
