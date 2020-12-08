@@ -29,7 +29,6 @@ export default class Course extends Component{
     render(){
         //Retrieve all Courses Data from state
         const courses = this.state.allCourses || [];
-        console.log(courses);
         return(
             <div className="bounds">  
                 {
